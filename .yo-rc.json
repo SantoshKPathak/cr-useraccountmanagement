@@ -1,0 +1,40 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.hzn.cr.uam"
+    },
+    "jhipsterVersion": "6.10.5",
+    "applicationType": "monolith",
+    "baseName": "UserAccountManagement",
+    "packageName": "com.hzn.cr.uam",
+    "packageFolder": "com/hzn/cr/uam",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": false,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Memory",
+    "prodDatabaseType": "oracle",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "OTQ3ODJlYzkyZjk1ODM4MTJkYWJhZTllN2MyNDEzYjczNTJjYWU1MWU5ZWE3Y2QwNzZiMzhkNmI4ZTZkNzBmZTg0YjRiZmRjM2YxNTZjMzVkMmUwYTNhMDNjYzMwNmI3ZTFlYWE0Y2U0MjRhZWQxYmM0MmJkYmYwYjAzMTc2MDU=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "yarn",
+    "clientFramework": "angularX",
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "creationTimestamp": 1610230069362,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "blueprints": []
+  }
+}
