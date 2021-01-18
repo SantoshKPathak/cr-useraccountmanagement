@@ -1,0 +1,13 @@
+entity Staff(stf_staff){
+	uid Integer required,
+    id String required,
+    status String,
+    nameKey String,
+    firstName String,
+    middleName String,
+    lastName String,
+    usrUidCreatedBy Integer,
+    createDate LocalDate,
+    usrUidUpdatedBy Integer,
+    lastUpdateDate LocalDate,
+}

@@ -1,0 +1,35 @@
+entity Staff(stf_staff){
+	uid Integer required,
+    id String required,
+    status String,
+    nameKey String,
+    firstName String,
+    middleName String,
+    lastName String,
+    usrUidCreatedBy Integer,
+    createDate LocalDate,
+    usrUidUpdatedBy Integer,
+    lastUpdateDate LocalDate,
+}
+entity UsrUser(usr_user){
+	usrUid Integer required,
+    usrStfUid Integer,
+    usrId String maxlength(32),
+    usrAccountStatus String maxlength(1),
+    usrDateAccountExpiration LocalDate,
+    usrAccountLockedYN String maxlength(1),
+    usrRecordStatus String maxlength(1),
+    usrDatePasswordExpiration LocalDate,
+    usrUserType String maxlength(1),
+    usrRecordStatusDate LocalDate,
+    usrCreateDate LocalDate,
+    usrUsrUidCreatedBy Integer,
+    usrUsrUidUpdatedBy Integer,
+    usrLastUpdateDate LocalDate
+}
+
+relationship OneToMany {
+    Staff{users} to UsrUser{staff}
+}
+
+dto * with mapstruct

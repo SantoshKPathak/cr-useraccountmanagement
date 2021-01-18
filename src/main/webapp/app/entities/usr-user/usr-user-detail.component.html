@@ -1,0 +1,84 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="usrUser">
+      <h2><span>Usr User</span> {{ usrUser.usrUid }}</h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>Usr Uid</span></dt>
+        <dd>
+          <span>{{ usrUser.usrUid }}</span>
+        </dd>
+        <dt><span>Usr Stf Uid</span></dt>
+        <dd>
+          <span>{{ usrUser.usrStfUid }}</span>
+        </dd>
+        <dt><span>Usr Id</span></dt>
+        <dd>
+          <span>{{ usrUser.usrId }}</span>
+        </dd>
+        <dt><span>Usr Account Status</span></dt>
+        <dd>
+          <span>{{ usrUser.usrAccountStatus }}</span>
+        </dd>
+        <dt><span>Usr Date Account Expiration</span></dt>
+        <dd>
+          <span>{{ usrUser.usrDateAccountExpiration }}</span>
+        </dd>
+        <dt><span>Usr Account Locked YN</span></dt>
+        <dd>
+          <span>{{ usrUser.usrAccountLockedYN }}</span>
+        </dd>
+        <dt><span>Usr Record Status</span></dt>
+        <dd>
+          <span>{{ usrUser.usrRecordStatus }}</span>
+        </dd>
+        <dt><span>Usr Date Password Expiration</span></dt>
+        <dd>
+          <span>{{ usrUser.usrDatePasswordExpiration }}</span>
+        </dd>
+        <dt><span>Usr User Type</span></dt>
+        <dd>
+          <span>{{ usrUser.usrUserType }}</span>
+        </dd>
+        <dt><span>Usr Record Status Date</span></dt>
+        <dd>
+          <span>{{ usrUser.usrRecordStatusDate }}</span>
+        </dd>
+        <dt><span>Usr Create Date</span></dt>
+        <dd>
+          <span>{{ usrUser.usrCreateDate }}</span>
+        </dd>
+        <dt><span>Usr Usr Uid Created By</span></dt>
+        <dd>
+          <span>{{ usrUser.usrUsrUidCreatedBy }}</span>
+        </dd>
+        <dt><span>Usr Usr Uid Updated By</span></dt>
+        <dd>
+          <span>{{ usrUser.usrUsrUidUpdatedBy }}</span>
+        </dd>
+        <dt><span>Usr Last Update Date</span></dt>
+        <dd>
+          <span>{{ usrUser.usrLastUpdateDate }}</span>
+        </dd>
+        <!-- <dt><span>Staff</span></dt> -->
+        <!-- <dd>
+          <div *ngIf="usrUser.usrStfUid">
+            <a [routerLink]="['/staff', usrUser.usrStfUid, 'view']">{{ usrUser.usrStfUid }}</a>
+          </div>
+        </dd> -->
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/usr-user', usrUser.usrUid, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

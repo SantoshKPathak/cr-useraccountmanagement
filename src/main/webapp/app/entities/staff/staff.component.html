@@ -1,0 +1,72 @@
+<div>
+  <h2 id="page-heading">
+    <span>Staff</span>
+
+    <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-staff" [routerLink]="['/staff/new']">
+      <fa-icon icon="plus"></fa-icon>
+      <span> Create a new Staff </span>
+    </button>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="staff?.length === 0">
+    <span>No staff found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="staff && staff.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>Uid</span></th>
+          <th scope="col"><span>Status</span></th>
+          <th scope="col"><span>Name Key</span></th>
+          <th scope="col"><span>First Name</span></th>
+          <th scope="col"><span>Middle Name</span></th>
+          <th scope="col"><span>Last Name</span></th>
+          <th scope="col"><span>Usr Uid Created By</span></th>
+          <th scope="col"><span>Create Date</span></th>
+          <th scope="col"><span>Usr Uid Updated By</span></th>
+          <th scope="col"><span>Last Update Date</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let staff of staff; trackBy: trackId">
+          <td>
+            <a [routerLink]="['/staff', staff.uid, 'view']">{{ staff.uid }}</a>
+          </td>
+          <td>{{ staff.status }}</td>
+          <td>{{ staff.nameKey }}</td>
+          <td>{{ staff.firstName }}</td>
+          <td>{{ staff.middleName }}</td>
+          <td>{{ staff.lastName }}</td>
+          <td>{{ staff.usrUidCreatedBy }}</td>
+          <td>{{ staff.createDate | date: 'mediumDate' }}</td>
+          <td>{{ staff.usrUidUpdatedBy }}</td>
+          <td>{{ staff.lastUpdateDate | date: 'mediumDate' }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/staff', staff.uid, 'view']" class="btn btn-info btn-sm">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/staff', staff.uid, 'edit']" class="btn btn-primary btn-sm">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(staff)" class="btn btn-danger btn-sm">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

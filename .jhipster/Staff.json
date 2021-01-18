@@ -1,0 +1,67 @@
+{
+  "fluentMethods": true,
+  "clientRootFolder": "",
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "usrUser",
+      "otherEntityRelationshipName": "staff",
+      "relationshipName": "users"
+    }
+  ],
+  "fields": [
+    {
+      "fieldName": "uid",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nameKey",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "firstName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "middleName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "usrUidCreatedBy",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "createDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "usrUidUpdatedBy",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "lastUpdateDate",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "changelogDate": "20210109233904",
+  "dto": "mapstruct",
+  "searchEngine": false,
+  "service": "serviceClass",
+  "entityTableName": "stf_staff",
+  "databaseType": "sql",
+  "readOnly": false,
+  "jpaMetamodelFiltering": false,
+  "pagination": "no",
+  "name": "Staff",
+  "embedded": false,
+  "applications": "*"
+}

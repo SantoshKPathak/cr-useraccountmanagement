@@ -1,0 +1,241 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-usr-user-heading">Create or edit a User</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <!-- <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div> -->
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_usrUid">Usr Uid</label>
+          <input type="number" class="form-control" name="usrUid" id="field_usrUid" formControlName="usrUid" />
+          <div *ngIf="editForm.get('usrUid')!.invalid && (editForm.get('usrUid')!.dirty || editForm.get('usrUid')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('usrUid')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('usrUid')?.errors?.number"> This field should be a number. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_usrStfUid">Usr Stf Uid</label>
+          <input type="number" class="form-control" name="usrStfUid" id="field_usrStfUid" formControlName="usrStfUid" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_usrId">Usr Id</label>
+          <input type="text" class="form-control" name="usrId" id="field_usrId" formControlName="usrId" />
+          <div *ngIf="editForm.get('usrId')!.invalid && (editForm.get('usrId')!.dirty || editForm.get('usrId')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('usrId')?.errors?.maxlength">
+              This field cannot be longer than 32 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_usrAccountStatus">Usr Account Status</label>
+          <input type="text" class="form-control" name="usrAccountStatus" id="field_usrAccountStatus" formControlName="usrAccountStatus" />
+          <div
+            *ngIf="
+              editForm.get('usrAccountStatus')!.invalid &&
+              (editForm.get('usrAccountStatus')!.dirty || editForm.get('usrAccountStatus')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('usrAccountStatus')?.errors?.maxlength">
+              This field cannot be longer than 1 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_usrDateAccountExpiration">Usr Date Account Expiration</label>
+          <div class="input-group">
+            <input
+              id="field_usrDateAccountExpiration"
+              type="text"
+              class="form-control"
+              name="usrDateAccountExpiration"
+              ngbDatepicker
+              #usrDateAccountExpirationDp="ngbDatepicker"
+              formControlName="usrDateAccountExpiration"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="usrDateAccountExpirationDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_usrAccountLockedYN">Usr Account Locked YN</label>
+          <input
+            type="text"
+            class="form-control"
+            name="usrAccountLockedYN"
+            id="field_usrAccountLockedYN"
+            formControlName="usrAccountLockedYN"
+          />
+          <div
+            *ngIf="
+              editForm.get('usrAccountLockedYN')!.invalid &&
+              (editForm.get('usrAccountLockedYN')!.dirty || editForm.get('usrAccountLockedYN')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('usrAccountLockedYN')?.errors?.maxlength">
+              This field cannot be longer than 1 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_usrRecordStatus">Usr Record Status</label>
+          <input type="text" class="form-control" name="usrRecordStatus" id="field_usrRecordStatus" formControlName="usrRecordStatus" />
+          <div
+            *ngIf="
+              editForm.get('usrRecordStatus')!.invalid &&
+              (editForm.get('usrRecordStatus')!.dirty || editForm.get('usrRecordStatus')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('usrRecordStatus')?.errors?.maxlength">
+              This field cannot be longer than 1 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_usrDatePasswordExpiration">Usr Date Password Expiration</label>
+          <div class="input-group">
+            <input
+              id="field_usrDatePasswordExpiration"
+              type="text"
+              class="form-control"
+              name="usrDatePasswordExpiration"
+              ngbDatepicker
+              #usrDatePasswordExpirationDp="ngbDatepicker"
+              formControlName="usrDatePasswordExpiration"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="usrDatePasswordExpirationDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_usrUserType">Usr User Type</label>
+          <input type="text" class="form-control" name="usrUserType" id="field_usrUserType" formControlName="usrUserType" />
+          <div *ngIf="editForm.get('usrUserType')!.invalid && (editForm.get('usrUserType')!.dirty || editForm.get('usrUserType')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('usrUserType')?.errors?.maxlength">
+              This field cannot be longer than 1 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_usrRecordStatusDate">Usr Record Status Date</label>
+          <div class="input-group">
+            <input
+              id="field_usrRecordStatusDate"
+              type="text"
+              class="form-control"
+              name="usrRecordStatusDate"
+              ngbDatepicker
+              #usrRecordStatusDateDp="ngbDatepicker"
+              formControlName="usrRecordStatusDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="usrRecordStatusDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_usrCreateDate">Usr Create Date</label>
+          <div class="input-group">
+            <input
+              id="field_usrCreateDate"
+              type="text"
+              class="form-control"
+              name="usrCreateDate"
+              ngbDatepicker
+              #usrCreateDateDp="ngbDatepicker"
+              formControlName="usrCreateDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="usrCreateDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_usrUsrUidCreatedBy">Usr Usr Uid Created By</label>
+          <input
+            type="number"
+            class="form-control"
+            name="usrUsrUidCreatedBy"
+            id="field_usrUsrUidCreatedBy"
+            formControlName="usrUsrUidCreatedBy"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_usrUsrUidUpdatedBy">Usr Usr Uid Updated By</label>
+          <input
+            type="number"
+            class="form-control"
+            name="usrUsrUidUpdatedBy"
+            id="field_usrUsrUidUpdatedBy"
+            formControlName="usrUsrUidUpdatedBy"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_usrLastUpdateDate">Usr Last Update Date</label>
+          <div class="input-group">
+            <input
+              id="field_usrLastUpdateDate"
+              type="text"
+              class="form-control"
+              name="usrLastUpdateDate"
+              ngbDatepicker
+              #usrLastUpdateDateDp="ngbDatepicker"
+              formControlName="usrLastUpdateDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="usrLastUpdateDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <!-- <div class="form-group">
+          <label class="form-control-label" for="field_staff">Staff</label>
+          <select class="form-control" id="field_staff" name="staff" formControlName="staffId">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="staffOption.uid" *ngFor="let staffOption of staff; trackBy: trackById">{{ staffOption.uid }}</option>
+          </select>
+        </div> -->
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

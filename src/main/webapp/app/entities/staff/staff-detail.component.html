@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="staff">
+      <h2><span>Staff</span> {{ staff.uid }}</h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>Uid</span></dt>
+        <dd>
+          <span>{{ staff.uid }}</span>
+        </dd>
+        <dt><span>Status</span></dt>
+        <dd>
+          <span>{{ staff.status }}</span>
+        </dd>
+        <dt><span>Name Key</span></dt>
+        <dd>
+          <span>{{ staff.nameKey }}</span>
+        </dd>
+        <dt><span>First Name</span></dt>
+        <dd>
+          <span>{{ staff.firstName }}</span>
+        </dd>
+        <dt><span>Middle Name</span></dt>
+        <dd>
+          <span>{{ staff.middleName }}</span>
+        </dd>
+        <dt><span>Last Name</span></dt>
+        <dd>
+          <span>{{ staff.lastName }}</span>
+        </dd>
+        <dt><span>Usr Uid Created By</span></dt>
+        <dd>
+          <span>{{ staff.usrUidCreatedBy }}</span>
+        </dd>
+        <dt><span>Create Date</span></dt>
+        <dd>
+          <span>{{ staff.createDate }}</span>
+        </dd>
+        <dt><span>Usr Uid Updated By</span></dt>
+        <dd>
+          <span>{{ staff.usrUidUpdatedBy }}</span>
+        </dd>
+        <dt><span>Last Update Date</span></dt>
+        <dd>
+          <span>{{ staff.lastUpdateDate }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/staff', staff.uid, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+<div>
+  <h2 id="page-heading">
+    <span>Users</span>
+
+    <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-usr-user" [routerLink]="['/usr-user/new']">
+      <fa-icon icon="plus"></fa-icon>
+      <span> Create a new User </span>
+    </button>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="usrUsers?.length === 0">
+    <span>No Users found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="usrUsers && usrUsers.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>Usr Uid</span></th>
+          <th scope="col"><span>Usr Stf Uid</span></th>
+          <th scope="col"><span>Usr Id</span></th>
+          <th scope="col"><span>Usr Account Status</span></th>
+          <th scope="col"><span>Usr Date Account Expiration</span></th>
+          <th scope="col"><span>Usr Account Locked YN</span></th>
+          <th scope="col"><span>Usr Record Status</span></th>
+          <th scope="col"><span>Usr Date Password Expiration</span></th>
+          <th scope="col"><span>Usr User Type</span></th>
+          <th scope="col"><span>Usr Record Status Date</span></th>
+          <th scope="col"><span>Usr Create Date</span></th>
+          <th scope="col"><span>Usr Usr Uid Created By</span></th>
+          <th scope="col"><span>Usr Usr Uid Updated By</span></th>
+          <th scope="col"><span>Usr Last Update Date</span></th>
+          <!-- <th scope="col"><span>Staff</span></th> -->
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usrUser of usrUsers; trackBy: trackId">
+          <td>
+            <a [routerLink]="['/usr-user', usrUser.usrUid, 'view']">{{ usrUser.usrUid }}</a>
+          </td>
+          <td>{{ usrUser.usrStfUid }}</td>
+          <td>{{ usrUser.usrId }}</td>
+          <td>{{ usrUser.usrAccountStatus }}</td>
+          <td>{{ usrUser.usrDateAccountExpiration | date: 'mediumDate' }}</td>
+          <td>{{ usrUser.usrAccountLockedYN }}</td>
+          <td>{{ usrUser.usrRecordStatus }}</td>
+          <td>{{ usrUser.usrDatePasswordExpiration | date: 'mediumDate' }}</td>
+          <td>{{ usrUser.usrUserType }}</td>
+          <td>{{ usrUser.usrRecordStatusDate | date: 'mediumDate' }}</td>
+          <td>{{ usrUser.usrCreateDate | date: 'mediumDate' }}</td>
+          <td>{{ usrUser.usrUsrUidCreatedBy }}</td>
+          <td>{{ usrUser.usrUsrUidUpdatedBy }}</td>
+          <td>{{ usrUser.usrLastUpdateDate | date: 'mediumDate' }}</td>
+          <!-- <td>
+            <div *ngIf="usrUser.usrStfUid">
+              <a [routerLink]="['/staff', usrUser.usrStfUid, 'view']">{{ usrUser.usrStfUid }}</a>
+            </div>
+          </td> -->
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/usr-user', usrUser.usrUid, 'view']" class="btn btn-info btn-sm">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/usr-user', usrUser.usrUid, 'edit']" class="btn btn-primary btn-sm">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(usrUser)" class="btn btn-danger btn-sm">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

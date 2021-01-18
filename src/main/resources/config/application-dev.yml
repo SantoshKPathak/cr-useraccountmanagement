@@ -45,7 +45,7 @@ spring:
       auto-commit: false
   h2:
     console:
-      enabled: false
+      enabled: true
   jpa:
     database-platform: io.github.jhipster.domain.util.FixedH2Dialect
     show-sql: true
@@ -64,6 +64,8 @@ spring:
 
 server:
   port: 8080
+  servlet:
+    context-path: '/cruseraccountmanagement'
 
 # ===================================================================
 # JHipster specific properties

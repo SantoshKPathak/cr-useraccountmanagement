@@ -1,0 +1,92 @@
+{
+  "name": "UsrUser",
+  "fields": [
+    {
+      "fieldName": "usrUid",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "usrStfUid",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "usrId",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "32"
+    },
+    {
+      "fieldName": "usrAccountStatus",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1"
+    },
+    {
+      "fieldName": "usrDateAccountExpiration",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "usrAccountLockedYN",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1"
+    },
+    {
+      "fieldName": "usrRecordStatus",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1"
+    },
+    {
+      "fieldName": "usrDatePasswordExpiration",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "usrUserType",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1"
+    },
+    {
+      "fieldName": "usrRecordStatusDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "usrCreateDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "usrUsrUidCreatedBy",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "usrUsrUidUpdatedBy",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "usrLastUpdateDate",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "staff",
+      "otherEntityRelationshipName": "users",
+      "relationshipName": "staff",
+      "otherEntityField": "uid"
+    }
+  ],
+  "changelogDate": "20210110204346",
+  "entityTableName": "usr_user",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}
