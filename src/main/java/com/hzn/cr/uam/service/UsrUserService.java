@@ -27,21 +27,21 @@ public interface UsrUserService {
      * @param usrUserDTO the entity to save.
      * @return the persisted entity.
      */
-    public UsrUserDTO save(UsrUserDTO usrUserDTO);
+    UsrUserDTO save(UsrUserDTO usrUserDTO);
 
     /**
      * Get all the usrUsers.
      *
      * @return the list of entities.
      */
-    public List<UsrUserDTO> findAll();
+    List<UsrUserDTO> findAll();
 
     /**
      * Get all the usrUsers for a given userId.
      *
      * @return the list of entities.
      */
-    public List<UsrUserDTO> findUsersByUserId(String userId);
+    List<UsrUserDTO> findUsersByUserId(String userId);
 
     /**
      * Get one usrUser by usrUid.
@@ -49,14 +49,20 @@ public interface UsrUserService {
      * @param usrUid the usrUid of the entity.
      * @return the entity.
      */
-    public Optional<UsrUserDTO> findOne(Integer usrUid);
+    Optional<UsrUserDTO> findOne(Integer usrUid);
 
     /**
      * Delete the usrUser by usrUid.
      *
      * @param usrUid the usrUid of the entity.
      */
-    public void delete(Integer usrUid);
+    void delete(Integer usrUid);
 
-    public UsrUserDTO activateUser(List<UsrUserDTO> dbUsers);
+    UsrUserDTO activateUser(UsrUserDTO existingUser);
+
+    UsrUserDTO getStaffAccount(List<UsrUserDTO> dbUsers);
+
+    Boolean isUserAccountDisabled(UsrUserDTO user);
+
+    Boolean isUserAccountActive(UsrUserDTO user);
 }

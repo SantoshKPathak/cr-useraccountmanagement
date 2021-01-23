@@ -13,14 +13,26 @@ export class NotificationInterceptor implements HttpInterceptor {
       tap((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
           let alert: string | null = null;
-
+          let alertError: string | null = null;
           event.headers.keys().forEach(entry => {
+            // console.log('NotificationInterceptor::' + entry);
             if (entry.toLowerCase().endsWith('app-alert')) {
               alert = event.headers.get(entry);
+              //  console.log('NotificationInterceptor app-alert::' + alert);
+            }
+            // if (entry.toLowerCase().endsWith('app-params')) {
+            //   // alert = event.headers.get(entry);
+            //   console.log('NotificationInterceptor app-params::' + event.headers.get(entry));
+            // }
+            if (entry.toLowerCase().endsWith('app-error')) {
+              alertError = event.headers.get(entry);
+              // console.log('NotificationInterceptor app-error::' + alertError);
             }
           });
 
-          if (alert) {
+          if (alertError) {
+            this.alertService.error(alertError);
+          } else if (alert) {
             this.alertService.success(alert);
           }
         }

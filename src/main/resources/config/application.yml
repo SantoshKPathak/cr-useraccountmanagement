@@ -166,3 +166,7 @@ jhipster:
 # ===================================================================
 
 # application:
+application:
+  api:
+    user-record:
+      lastUpdatedBy: 987654

@@ -7,6 +7,7 @@ import com.hzn.cr.uam.service.dto.UsrUserDTO;
 import com.hzn.cr.uam.service.mapper.UsrUserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,9 @@ import java.util.stream.Collectors;
 @Transactional
 public class UsrUserServiceImpl implements UsrUserService {
     private final Logger log = LoggerFactory.getLogger(UsrUserServiceImpl.class);
+
+    @Value("${application.api.user-record.lastUpdatedBy}")
+    private Integer lastUpdatedBy;
 
     private final UsrUserRepository usrUserRepository;
 
@@ -75,21 +79,31 @@ public class UsrUserServiceImpl implements UsrUserService {
             .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public UsrUserDTO activateUser(List<UsrUserDTO> dbUsers){
+    public UsrUserDTO getStaffAccount(List<UsrUserDTO> dbUsers){
         //filter the user with user type as STAFF (S)
-        Optional<UsrUserDTO> dbUser = dbUsers.stream()
-            .filter(userDTO ->userDTO.getUsrUserType().equals("S")).findFirst();
+        return dbUsers.stream()
+            .filter(userDTO ->userDTO.getUsrUserType().equals("S")).findFirst().get();
+    }
 
-       dbUser.ifPresent(user ->{
-           user.setUsrAccountStatus("A"); //activate account from expired status
-           user.setUsrAccountLockedYN("N"); // unlock account
-           user.setUsrDateAccountExpiration(null);// remove expiration date
-           user.setUsrDatePasswordExpiration(null);
-           user.setUsrLastUpdateDate(LocalDate.now()); //current date
-           user.setUsrUsrUidUpdatedBy(987654);// last updated user
-        });
+    public Boolean isUserAccountDisabled(UsrUserDTO existingUser){
+       return existingUser.getUsrAccountStatus().equals("D");
+    }
 
-        return save(dbUser.get());
+    public Boolean isUserAccountActive(UsrUserDTO existingUser){
+       return existingUser.getUsrAccountStatus().equals("A")
+           && existingUser.getUsrAccountLockedYN().equals("N")
+           && (existingUser.getUsrDateAccountExpiration() == null || existingUser.getUsrDateAccountExpiration().isAfter(LocalDate.now()))
+           && (existingUser.getUsrDatePasswordExpiration() == null || existingUser.getUsrDatePasswordExpiration().isAfter(LocalDate.now()));
+    }
+
+    public UsrUserDTO activateUser(UsrUserDTO existingUser){
+        existingUser.setUsrAccountStatus("A"); //activate account from expired status
+        existingUser.setUsrAccountLockedYN("N"); // unlock account
+        existingUser.setUsrDateAccountExpiration(null);// remove expiration date
+        existingUser.setUsrDatePasswordExpiration(null);
+        existingUser.setUsrLastUpdateDate(LocalDate.now()); //current date
+        existingUser.setUsrUsrUidUpdatedBy(lastUpdatedBy);// last updated user
+        return save(existingUser);
     }
     /**
      * Get one usrUser by usrUid.

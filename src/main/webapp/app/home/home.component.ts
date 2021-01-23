@@ -52,8 +52,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (usrUser.usrId !== undefined) {
       console.log('submitted userId:' + usrUser.usrId);
       this.subscribeToSaveResponse(this.usrUserService.activateAccount(usrUser));
-    } else {
-      this.subscribeToSaveResponse(this.usrUserService.create(usrUser));
     }
   }
 

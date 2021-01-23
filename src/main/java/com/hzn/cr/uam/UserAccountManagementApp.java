@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @SpringBootApplication
-@EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
+@EnableConfigurationProperties({LiquibaseProperties.class})
 public class UserAccountManagementApp {
 
     private static final Logger log = LoggerFactory.getLogger(UserAccountManagementApp.class);

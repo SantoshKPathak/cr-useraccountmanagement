@@ -12,6 +12,6 @@ public class ClientForwardController {
      */
     @GetMapping(value = "/**/{path:[^\\.]*}")
     public String forward() {
-        return "forward:/";
+        return "forward:/cruseraccountmanagement/";
     }
 }

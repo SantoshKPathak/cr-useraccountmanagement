@@ -11,6 +11,7 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       tap(null, (err: HttpErrorResponse) => {
+        console.log('ErrorHandlerInterceptor::' + JSON.stringify(err));
         if (!(err.status === 401 && (err.message === '' || (err.url && err.url.includes('api/account'))))) {
           this.eventManager.broadcast(new JhiEventWithContent('userAccountManagementApp.httpError', err));
         }

@@ -5,6 +5,7 @@ import com.hzn.cr.uam.service.UsrUserService;
 import com.hzn.cr.uam.web.rest.errors.BadRequestAlertException;
 import com.hzn.cr.uam.service.dto.UsrUserDTO;
 
+import com.hzn.cr.uam.web.rest.errors.LoginAlreadyUsedException;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -69,10 +70,17 @@ public class UsrUserResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/usr-users")
-    public ResponseEntity<UsrUserDTO> updateUsrUser(@Valid @RequestBody UsrUserDTO usrUserDTO) throws URISyntaxException {
+    public ResponseEntity<UsrUserDTO> updateUsrUser(@Valid @RequestBody UsrUserDTO usrUserDTO) {
         log.debug("REST request to update UsrUser : {}", usrUserDTO);
-        if (usrUserDTO.getUsrId() == null) {
-            throw new BadRequestAlertException("Invalid usr id", ENTITY_NAME, "usrId null");
+        if (usrUserDTO.getUsrUid() == null) {
+            throw new BadRequestAlertException("Invalid usrUid", ENTITY_NAME, "usrUid null");
+        }
+        Optional<UsrUserDTO> existingUserOpt = usrUserService.findOne(usrUserDTO.getUsrUid());
+
+        if (existingUserOpt.isPresent()) {
+            UsrUserDTO existingUser = existingUserOpt.get();
+            usrUserDTO.setUsrRecordVersion(existingUser.getUsrRecordVersion());
+            usrUserDTO.setUsrUid(existingUser.getUsrUid());
         }
         UsrUserDTO result = usrUserService.save(usrUserDTO);
         return ResponseEntity.ok()
@@ -90,23 +98,34 @@ public class UsrUserResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/cr-user/activate")
-    public ResponseEntity<UsrUserDTO> activateUser(@Valid @RequestBody UsrUserDTO usrUserDTO) throws URISyntaxException {
+    public ResponseEntity<UsrUserDTO> activateUser(@Valid @RequestBody UsrUserDTO usrUserDTO){
         log.debug("REST request to activate CR User : {}", usrUserDTO);
+
         if (usrUserDTO.getUsrId() == null) {
             throw new BadRequestAlertException("Invalid usrId", CR_ENTITY_NAME, "usrId null");
         }
         List<UsrUserDTO> dbUsrList = usrUserService.findUsersByUserId(usrUserDTO.getUsrId());
 
         if(null==dbUsrList || dbUsrList.size()==0){
-           return ResponseEntity.notFound()
-                .headers(HeaderUtil.createFailureAlert(applicationName, false, CR_ENTITY_NAME,"","UserId: "+usrUserDTO.getUsrId()+" not found")).build();
+            return ResponseUtil.wrapOrNotFound(Optional.of(usrUserDTO),
+                HeaderUtil.createFailureAlert(applicationName, false, ENTITY_NAME,usrUserDTO.getUsrId(),String.format("Failure!! UserId %s not found in CR.",usrUserDTO.getUsrId())));
+        }
+        UsrUserDTO existingStaff = usrUserService.getStaffAccount(dbUsrList);
+
+        if(usrUserService.isUserAccountActive(existingStaff)){
+            return ResponseUtil.wrapOrNotFound(Optional.of(usrUserDTO),
+                HeaderUtil.createAlert(applicationName, String.format("UserId %s is already active.",usrUserDTO.getUsrId()),usrUserDTO.getUsrId()));
         }
 
-        UsrUserDTO result = usrUserService.activateUser(dbUsrList);
+        if(usrUserService.isUserAccountDisabled(existingStaff)){
+            return ResponseUtil.wrapOrNotFound(Optional.of(usrUserDTO),
+                HeaderUtil.createFailureAlert(applicationName, false,ENTITY_NAME,usrUserDTO.getUsrId(),String.format("UserId %s is disabled.Please submit ACM to get access.",usrUserDTO.getUsrId())));
+        }
 
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, CR_ENTITY_NAME, result.getUsrId()))
-            .body(result);
+        UsrUserDTO result = usrUserService.activateUser(existingStaff);
+
+        return ResponseUtil.wrapOrNotFound(Optional.of(result),
+            HeaderUtil.createAlert(applicationName, String.format("Success!! Expired UserId %s is now activated.",result.getUsrId()),result.getUsrId()));
     }
 
 

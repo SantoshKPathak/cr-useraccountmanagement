@@ -44,12 +44,16 @@
                 id="field_usrId"
                 formControlName="usrId"
                 placeholder="C12345 or 654321"
+                maxlength="10"
               />
               <div
                 *ngIf="
                   userAccountForm.get('usrId')!.invalid && (userAccountForm.get('usrId')!.dirty || userAccountForm.get('usrId')!.touched)
                 "
               >
+                <!-- <small class="form-text text-danger" *ngIf="userAccountForm.get('usrId').length === 0"
+                  >Blank/Empty UserId is not allowed.</small
+                > -->
                 <small class="form-text text-danger"> User Id is required. </small>
               </div>
             </div>
