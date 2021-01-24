@@ -20,18 +20,23 @@ spring:
   application:
     name: UserAccountManagement
   datasource:
+    #    type: com.zaxxer.hikari.HikariDataSource
+    #    url: jdbc:h2:mem:UserAccountManagement;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    #    name:
+    #    username:
+    #    password:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:h2:mem:UserAccountManagement;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    name:
-    username:
-    password:
+    #url: jdbc:h2:mem:useraccountmanagement;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:mysql://localhost:3306/careradius?serverTimezone=EST
+    username: root
+    password: santoshadmin123
     hikari:
       auto-commit: false
   jackson:
     serialization:
       write-durations-as-timestamps: false
   jpa:
-    database-platform: io.github.jhipster.domain.util.FixedH2Dialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     open-in-view: false
     show-sql: false
     hibernate:
@@ -46,7 +51,7 @@ spring:
       hibernate.cache.use_query_cache: false
       hibernate.generate_statistics: false
       hibernate.hbm2ddl.auto: validate
-      hibernate.jdbc.time_zone: UTC
+      hibernate.jdbc.time_zone: EST
   liquibase:
     contexts: test
   mail:

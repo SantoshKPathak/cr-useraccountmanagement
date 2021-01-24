@@ -100,7 +100,7 @@
             <column name="user_id" type="numeric"/>
         </loadData>
         <createTable tableName="jhi_persistent_audit_event">
-            <column name="event_id" type="bigint" >
+            <column name="event_id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="principal" type="varchar(50)">

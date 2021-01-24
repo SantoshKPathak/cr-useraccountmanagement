@@ -37,21 +37,34 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:h2:mem:useraccountmanagement;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    username: UserAccountManagement
-    password:
+    #url: jdbc:h2:mem:useraccountmanagement;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:mysql://localhost:3306/careradius?serverTimezone=EST
+    #username: UserAccountManagement
+    #password:
+    username: root
+    password: santoshadmin123
     hikari:
       poolName: Hikari
-      auto-commit: false
-  h2:
-    console:
-      enabled: true
+      auto-commit: false #for H2 make it true
+  #  h2:
+  #    console:
+  #      enabled: true
   jpa:
-    database-platform: io.github.jhipster.domain.util.FixedH2Dialect
+    #database-platform: io.github.jhipster.domain.util.FixedH2Dialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: false #if SQl formating needed make it true
+        new_generator_mappings: false
     show-sql: true
+    hibernate:
+      ddl-auto: none
+
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev, faker
+    drop-first: true
+
   mail:
     host: localhost
     port: 25

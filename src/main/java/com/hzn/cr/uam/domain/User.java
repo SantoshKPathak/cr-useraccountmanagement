@@ -5,6 +5,7 @@ import com.hzn.cr.uam.config.Constants;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -27,8 +28,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    //@SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
     @NotNull

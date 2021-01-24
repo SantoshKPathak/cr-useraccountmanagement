@@ -1,6 +1,7 @@
 package com.hzn.cr.uam.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -19,6 +20,8 @@ public class UsrUser implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO, generator="native")
+    @GenericGenerator(name = "native", strategy = "native")
     @NotNull
     @Column(name = "usr_uid", nullable = false)
     private Integer usrUid;

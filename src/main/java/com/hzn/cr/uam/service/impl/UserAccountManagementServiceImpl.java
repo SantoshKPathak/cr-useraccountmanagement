@@ -67,8 +67,10 @@ public class UserAccountManagementServiceImpl implements UserAccountManagementSe
     public Boolean isUserAccountActive(UsrUserDTO existingUser){
        return existingUser.getUsrAccountStatus().equals("A")
            && existingUser.getUsrAccountLockedYN().equals("N")
-           && (existingUser.getUsrDateAccountExpiration() == null || existingUser.getUsrDateAccountExpiration().isAfter(LocalDate.now()))
-           && (existingUser.getUsrDatePasswordExpiration() == null || existingUser.getUsrDatePasswordExpiration().isAfter(LocalDate.now()));
+           && (existingUser.getUsrDateAccountExpiration() == null
+                || existingUser.getUsrDateAccountExpiration().isAfter(LocalDate.now()))
+           && (existingUser.getUsrDatePasswordExpiration() == null
+                || existingUser.getUsrDatePasswordExpiration().isAfter(LocalDate.now()));
     }
 
     public UsrUserDTO activateUser(UsrUserDTO existingUser){
