@@ -37,13 +37,6 @@ public interface UsrUserService {
     List<UsrUserDTO> findAll();
 
     /**
-     * Get all the usrUsers for a given userId.
-     *
-     * @return the list of entities.
-     */
-    List<UsrUserDTO> findUsersByUserId(String userId);
-
-    /**
      * Get one usrUser by usrUid.
      *
      * @param usrUid the usrUid of the entity.
@@ -57,12 +50,4 @@ public interface UsrUserService {
      * @param usrUid the usrUid of the entity.
      */
     void delete(Integer usrUid);
-
-    UsrUserDTO activateUser(UsrUserDTO existingUser);
-
-    UsrUserDTO getStaffAccount(List<UsrUserDTO> dbUsers);
-
-    Boolean isUserAccountDisabled(UsrUserDTO user);
-
-    Boolean isUserAccountActive(UsrUserDTO user);
 }

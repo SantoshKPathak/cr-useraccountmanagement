@@ -30,7 +30,7 @@ public class UsrUserResource {
     private final Logger log = LoggerFactory.getLogger(UsrUserResource.class);
 
     private static final String ENTITY_NAME = "usrUser";
-    private static final String CR_ENTITY_NAME = "User";
+
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
@@ -87,47 +87,6 @@ public class UsrUserResource {
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, usrUserDTO.getUsrUid().toString()))
             .body(result);
     }
-
-    /**
-     * {@code PUT  /usr-users} : Updates an existing usrUser.
-     *
-     * @param usrUserDTO the usrUserDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated usrUserDTO,
-     * or with status {@code 400 (Bad Request)} if the usrUserDTO is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the usrUserDTO couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PutMapping("/cr-user/activate")
-    public ResponseEntity<UsrUserDTO> activateUser(@Valid @RequestBody UsrUserDTO usrUserDTO){
-        log.debug("REST request to activate CR User : {}", usrUserDTO);
-
-        if (usrUserDTO.getUsrId() == null) {
-            throw new BadRequestAlertException("Invalid usrId", CR_ENTITY_NAME, "usrId null");
-        }
-        List<UsrUserDTO> dbUsrList = usrUserService.findUsersByUserId(usrUserDTO.getUsrId());
-
-        if(null==dbUsrList || dbUsrList.size()==0){
-            return ResponseUtil.wrapOrNotFound(Optional.of(usrUserDTO),
-                HeaderUtil.createFailureAlert(applicationName, false, ENTITY_NAME,usrUserDTO.getUsrId(),String.format("Failure!! UserId %s not found in CR.",usrUserDTO.getUsrId())));
-        }
-        UsrUserDTO existingStaff = usrUserService.getStaffAccount(dbUsrList);
-
-        if(usrUserService.isUserAccountActive(existingStaff)){
-            return ResponseUtil.wrapOrNotFound(Optional.of(usrUserDTO),
-                HeaderUtil.createAlert(applicationName, String.format("UserId %s is already active.",usrUserDTO.getUsrId()),usrUserDTO.getUsrId()));
-        }
-
-        if(usrUserService.isUserAccountDisabled(existingStaff)){
-            return ResponseUtil.wrapOrNotFound(Optional.of(usrUserDTO),
-                HeaderUtil.createFailureAlert(applicationName, false,ENTITY_NAME,usrUserDTO.getUsrId(),String.format("UserId %s is disabled.Please submit ACM to get access.",usrUserDTO.getUsrId())));
-        }
-
-        UsrUserDTO result = usrUserService.activateUser(existingStaff);
-
-        return ResponseUtil.wrapOrNotFound(Optional.of(result),
-            HeaderUtil.createAlert(applicationName, String.format("Success!! Expired UserId %s is now activated.",result.getUsrId()),result.getUsrId()));
-    }
-
 
     /**
      * {@code GET  /usr-users} : get all the usrUsers.

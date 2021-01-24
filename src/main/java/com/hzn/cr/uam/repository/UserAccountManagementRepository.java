@@ -1,8 +1,7 @@
 package com.hzn.cr.uam.repository;
 
 import com.hzn.cr.uam.domain.UsrUser;
-
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,5 +11,7 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface UsrUserRepository extends JpaRepository<UsrUser, Integer> {
+public interface UserAccountManagementRepository extends JpaRepository<UsrUser, Integer> {
+
+    List<UsrUser> findByUsrId(String userId);
 }

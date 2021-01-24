@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.isSaving = true;
     const usrUser = this.createFromForm();
     if (usrUser.usrId !== undefined) {
-      console.log('submitted userId:' + usrUser.usrId);
+      //  console.log('submitted userId:' + usrUser.usrId);
       this.subscribeToSaveResponse(this.usrUserService.activateAccount(usrUser));
     }
   }
